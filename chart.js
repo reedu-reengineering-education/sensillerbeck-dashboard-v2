@@ -138,7 +138,6 @@ var options = {
 };
 
 function changePhenomena(phenomena) {
-  console.log(options);
   switch (phenomena) {
     case "humidity":
       options.title.text = "Luftfeuchtigkeit";
