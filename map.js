@@ -28,22 +28,22 @@ const marker1 = new mapboxgl.Marker()
   .addTo(map);
 
 // openSenseMap / AFG senseBox
-const afg1 = new mapboxgl.Marker({ color: "black" })
+const afg1 = new mapboxgl.Marker({ color: "#2b908f" })
   .setLngLat([7.289686, 51.978748])
   .setPopup(popup)
   .addTo(map);
 
-const afg2 = new mapboxgl.Marker({ color: "blue" })
+const afg2 = new mapboxgl.Marker({ color: "#008FFB" })
   .setLngLat([7.285652, 51.973461])
   .setPopup(popup)
   .addTo(map);
 
-const afg3 = new mapboxgl.Marker({ color: "yellow" })
+const afg3 = new mapboxgl.Marker({ color: "#f9ce1d" })
   .setLngLat([7.293892, 51.976422])
   .setPopup(popup)
   .addTo(map);
 
-const afg4 = new mapboxgl.Marker({ color: "pink" })
+const afg4 = new mapboxgl.Marker({ color: "#f9a3a4" })
   .setLngLat([7.287712, 51.972615])
   .setPopup(popup)
   .addTo(map);

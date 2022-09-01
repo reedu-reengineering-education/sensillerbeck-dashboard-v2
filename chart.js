@@ -1,34 +1,75 @@
 // URL to fetch data
 // https://api.opensensemap.org/boxes/:senseBoxId/data/:sensorId?from-date=fromDate&to-date=toDate&download=true&format=json
 
-// TODO define senseboxes and ids
+const devices = {
+  afg1: {
+    deviceId: "630df36655cdd4001b1372e1",
+    temperature: "630df36655cdd4001b1372e8",
+    humidity: "630df36655cdd4001b1372e7",
+    pm10: "630df36655cdd4001b1372e4",
+    pm25: "630df36655cdd4001b1372e3",
+    illuminance: "630df36655cdd4001b1372e6",
+    uv: "630df36655cdd4001b1372e5",
+    pressure: "630df36655cdd4001b1372e2",
+  },
+  afg2: {
+    deviceId: "630e0d7680edfb001cebfbe2",
+    temperature: "630e0d7680edfb001cebfbe9",
+    humidity: "630e0d7680edfb001cebfbe8",
+    pm10: "630e0d7680edfb001cebfbe5",
+    pm25: "630e0d7680edfb001cebfbe4",
+    illuminance: "630e0d7680edfb001cebfbe7",
+    uv: "630e0d7680edfb001cebfbe6",
+    pressure: "630e0d7680edfb001cebfbe3",
+  },
+  afg3: {
+    deviceId: "630e0eee80edfb001cecad91",
+    temperature: "630e0eee80edfb001cecad98",
+    humidity: "630e0eee80edfb001cecad97",
+    pm10: "630e0eee80edfb001cecad94",
+    pm25: "630e0eee80edfb001cecad93",
+    illuminance: "630e0eee80edfb001cecad96",
+    uv: "630e0eee80edfb001cecad95",
+    pressure: "630e0eee80edfb001cecad92",
+  },
+  afg4: {
+    deviceId: "630e0f2680edfb001ceccbd4",
+    temperature: "630e0f2680edfb001ceccbdb",
+    humidity: "630e0f2680edfb001ceccbda",
+    pm10: "630e0f2680edfb001ceccbd7",
+    pm25: "630e0f2680edfb001ceccbd6",
+    illuminance: "630e0f2680edfb001ceccbd9",
+    uv: "630e0f2680edfb001ceccbd8",
+    pressure: "630e0f2680edfb001ceccbd5",
+  },
+};
 
 var options = {
-  color: [],
+  colors: ["#2b908f", "#008FFB", "#f9ce1d", "#f9a3a4"],
   series: [
     {
-      name: "AFG 1",
+      name: "AFG1",
       data: [
         17, 16, 16, 16, 15, 15, 14, 14, 14, 16, 19, 21, 22, 23, 24, 24, 24, 24,
         24, 24, 21, 19, 18, 17, 16,
       ],
     },
     {
-      name: "AFG 2",
+      name: "AFG2",
       data: [
         15, 16, 16, 16, 15, 14, 15, 16, 17, 18, 20, 22, 22, 24, 25, 25, 25, 26,
         25, 25, 23, 21, 19, 17, 15,
       ],
     },
     {
-      name: "AFG 3",
+      name: "AFG3",
       data: [
         5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
         5,
       ],
     },
     {
-      name: "AFG 4",
+      name: "AFG4",
       data: [
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3,
         2, 1, 0,
@@ -112,8 +153,8 @@ function changePhenomena(phenomena) {
       options.yaxis[0].title.text = "Feinstaub in μg/m³";
       break;
     case "uv":
-      options.title.text = "UV Stärke";
-      options.yaxis[0].title.text = "UV Stärke in μW / cm²";
+      options.title.text = "UV Intensität";
+      options.yaxis[0].title.text = "UV Intensität in μW / cm²";
       break;
     case "pressure":
       options.title.text = "Luftdruck";
