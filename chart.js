@@ -1,6 +1,3 @@
-// URL to fetch data
-// https://api.opensensemap.org/boxes/:senseBoxId/data/:sensorId?from-date=fromDate&to-date=toDate&download=true&format=json
-
 const devices = {
   afg1: {
     deviceId: "630df36655cdd4001b1372e1",
@@ -44,46 +41,89 @@ const devices = {
   },
 };
 
+window.addEventListener("DOMContentLoaded", function () {
+  Promise.all([
+    fetch(
+      "https://api.opensensemap.org/boxes/630df36655cdd4001b1372e1/data/630df36655cdd4001b1372e8?format=json"
+    ),
+    fetch(
+      "https://api.opensensemap.org/boxes/630e0d7680edfb001cebfbe2/data/630e0d7680edfb001cebfbe9?format=json"
+    ),
+    fetch(
+      "https://api.opensensemap.org/boxes/630e0eee80edfb001cecad91/data/630e0eee80edfb001cecad98?format=json"
+    ),
+    fetch(
+      "https://api.opensensemap.org/boxes/630e0f2680edfb001ceccbd4/data/630e0f2680edfb001ceccbdb?format=json"
+    ),
+  ])
+    .then(function (responses) {
+      // Get a JSON object from each of the responses
+      return Promise.all(
+        responses.map(function (response) {
+          return response.json();
+        })
+      );
+    })
+    .then(function (data) {
+      // {x: zeit, y: value}
+      const measurements = data.map((entry, index) => {
+        const sensor = entry.map((measurement) => ({
+          x: measurement.createdAt,
+          y: measurement.value,
+        }));
+        options.series.push({
+          id: `AFG ${index+1}`,
+          name: `AFG ${index+1}`,
+          data: sensor,
+        });
+      });
+      chart.updateOptions(options);
+    })
+    .catch(function (err) {
+      // There was an error
+      console.warn("Something went wrong.", err);
+    });
+});
+
+function fetchMeasurements (deviceId, sensorId) {
+  fetch(
+    `https://api.opensensemap.org/boxes/${deviceId}/data/${sensorId}?format=json`
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // {x: zeit, y: value}
+      const measurements = data.map((entry) => ({
+        x: entry.createdAt,
+        y: entry.value,
+      }));
+      options.series = [
+        {
+          id: "AFG1",
+          name: "AFG1",
+          data: measurements,
+        },
+      ];
+      chart.updateOptions(options);
+    })
+    .catch(function (err) {
+      // There was an error
+      console.warn("Something went wrong.", err);
+    });
+}
+
 var options = {
   colors: ["#2b908f", "#008FFB", "#f9ce1d", "#f9a3a4"],
-  series: [
-    {
-      name: "AFG1",
-      data: [
-        17, 16, 16, 16, 15, 15, 14, 14, 14, 16, 19, 21, 22, 23, 24, 24, 24, 24,
-        24, 24, 21, 19, 18, 17, 16,
-      ],
-    },
-    {
-      name: "AFG2",
-      data: [
-        15, 16, 16, 16, 15, 14, 15, 16, 17, 18, 20, 22, 22, 24, 25, 25, 25, 26,
-        25, 25, 23, 21, 19, 17, 15,
-      ],
-    },
-    {
-      name: "AFG3",
-      data: [
-        5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-        5,
-      ],
-    },
-    {
-      name: "AFG4",
-      data: [
-        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3,
-        2, 1, 0,
-      ],
-    },
-  ],
+  series: [],
   chart: {
     toolbar: {
-      show: false,
+      show: true,
     },
     height: 300,
     type: "line",
     zoom: {
-      enabled: false,
+      enabled: true,
     },
   },
   dataLabels: {
@@ -104,33 +144,7 @@ var options = {
   },
   xaxis: {
     title: { text: "Uhrzeit" },
-    categories: [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10",
-      "11",
-      "12",
-      "13",
-      "14",
-      "15",
-      "16",
-      "17",
-      "18",
-      "19",
-      "20",
-      "21",
-      "22",
-      "23",
-      "24",
-    ],
+    type: 'datetime'
   },
   yaxis: {
     title: { text: "Temperatur in °C" },
@@ -142,30 +156,37 @@ function changePhenomena(phenomena) {
     case "humidity":
       options.title.text = "Luftfeuchtigkeit";
       options.yaxis[0].title.text = "Luftfeuchtigkeit in %";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.humidity)
       break;
     case "pm10":
       options.title.text = "Feinstaub (PM10)";
       options.yaxis[0].title.text = "Feinstaub in μg/m³";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.pm10);
       break;
     case "pm25":
       options.title.text = "Feinstaub (PM 2.5)";
       options.yaxis[0].title.text = "Feinstaub in μg/m³";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.pm25);
       break;
     case "uv":
       options.title.text = "UV Intensität";
       options.yaxis[0].title.text = "UV Intensität in μW / cm²";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.uv);
       break;
     case "pressure":
       options.title.text = "Luftdruck";
       options.yaxis[0].title.text = "Luftdruck in hPa";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.pressure);
       break;
     case "temperature":
       options.title.text = "Temperatur";
       options.yaxis[0].title.text = "Temperatur in °C";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.temperature);
       break;
     case "illuminance":
       options.title.text = "Beleuchtungsstärke";
       options.yaxis[0].title.text = "Beleuchtungsstärke in lx";
+      fetchMeasurements(devices.afg1.deviceId, devices.afg1.illuminance);
       break;
     default:
       break;
