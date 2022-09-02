@@ -13,6 +13,10 @@ map.on("style.load", () => {
   map.setFog({}); // Set the default atmosphere style
 });
 
+map.on("load", function () {
+  map.resize();
+});
+
 function goToOnMap (game) {
 
   if (game === 'obst') {
