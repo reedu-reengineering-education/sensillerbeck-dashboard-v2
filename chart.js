@@ -144,10 +144,16 @@ var options = {
   },
   xaxis: {
     title: { text: "Uhrzeit" },
-    type: 'datetime'
+    type: "datetime",
   },
   yaxis: {
     title: { text: "Temperatur in °C" },
+  },
+  tooltip: {
+    shared: true,
+    x: {
+      format: "dd.MM.yyyy HH:mm:ss",
+    },
   },
 };
 
