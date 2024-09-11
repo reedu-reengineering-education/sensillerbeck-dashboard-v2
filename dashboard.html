@@ -16,7 +16,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
   <title>Dashboard</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" type="text/css">
+  
   <style>
     body {
       font-family: 'Raleway', serif;
@@ -56,10 +58,15 @@
     </header>
     <main>
       <div class="row">
-        <div class="col-12 col-md-4">
-          <div >Wetter</div>
-          <div id="Wetter" class="alert alert-primary" role="alert"></div>
+        <div class="col-16 col-md-4">
           
+          <div class="alert alert-secondary" role="alert">
+            <div>Wetter</div>
+            <div id="Wetter" ></div>
+            <figure></figure>
+              <i id="weather-day-icon" class="wi wi-day-cloudy"></i>
+            </figure>
+           </div>
           <!-- Element: Idee des Tages -->
           <div class="card rounded-3 shadow-sm">
             <div class="card-header py-3">

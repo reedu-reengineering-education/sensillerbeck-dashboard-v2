@@ -11,7 +11,7 @@
 //     minute: "numeric",
 //     second: "numeric",
 //     hour12: false,
-//   });
+  //   })
 // };
 
 // // Update the time every second
