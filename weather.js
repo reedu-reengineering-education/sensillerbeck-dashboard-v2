@@ -12,5 +12,5 @@ var renderTime = async function () {
     } catch (error){
         console.error('Error fetching weather data:', error);
     }
-    )
+    
     }
