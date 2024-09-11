@@ -1,5 +1,24 @@
-var clock = document.querySelector("#Wetter");
+const ICON_MAPPING = {
+    'clear-day': 'wi-day-sunny',
+    'clear-night': 'wi-night-clear',
+    'partly-cloudy-day': 'wi-day-cloudy',
+    'partly-cloudy-night': 'wi-night-cloudy',
+    'cloudy': 'wi-cloud',
+    'fog': 'wi-fog',
+    'wind': 'wi-strong-wind',
+    'rain': 'wi-rain',
+    'sleet': 'wi-sleet',
+    'snow': 'wi-snow',
+    'hail': 'wi-hail',
+    'thunderstorm': 'wi-thunderstorm',
+  }
 
+       
+
+
+
+var clock = document.querySelector("#Wetter");
+var Icon = document.querySelector("#WetterIcon");
 var renderTime = async function () {
     const apiURL = 'https://api.brightsky.dev/weather?lat=52&lon=7.6&date=2024-09-11';
     try {
@@ -10,13 +29,16 @@ var renderTime = async function () {
             var time = new Date();
             time.getHours();
             clock.textContent = data.weather[time.getHours()-1].temperature +"°"
+            const icons = data.weather.map((record) => record.icon.replace('-night', '-day'));
+            document.getElementById('weather-day-icon').className = `wi ${ ICON_MAPPING[mode(icons)] }`;
+            Icon.textContent = data.weather[time.getHours()-1].Icon 
         }else {
             clock.textContent = "No weather data available";
         }
     } catch (error){
         console.error('Error fetching weather data:', error);
+
     }
-    
-    }
+}
+   
     setInterval(renderTime, 1000);
-    
