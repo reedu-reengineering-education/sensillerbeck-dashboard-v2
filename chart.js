@@ -39,7 +39,16 @@ const devices = {
     uv: "630e0f2680edfb001ceccbd8",
     pressure: "630e0f2680edfb001ceccbd5",
   },
+  afg5: {
+    deviceId: "630e0f2680edfb001ceccbd4",
+    Personenanzahl: "630e0f2680edfb001ceccbdb",
+  },
+  afg6: {
+    deviceId: "630e0f2680edfb001ceccbd4",
+    CO2Werte: "630e0f2680edfb001ceccbdb",
+  },
 };
+
 
 window.addEventListener("DOMContentLoaded", function () {
   Promise.all([
@@ -194,6 +203,16 @@ function changePhenomena(phenomena) {
       options.yaxis[0].title.text = "Beleuchtungsstärke in lx";
       fetchMeasurements(devices.afg1.deviceId, devices.afg1.illuminance);
       break;
+    case "visitors":
+      options.title.text = "Besucher im Nachhaltigkeitszentrum";
+      options.yaxis[0].title.text = "Personen";
+      fetchMeasurements(devices.afg5.devicedId, devices.afg5.illuminance);
+      break;
+    case "carbon dioxide":
+     options.title.text = "CO2 im Nachhaltigkeitszentrum";
+     options.yaxis[0].title.text = "CO2 in ppm";
+     fetchMeasurements(devices.afg6.devicedId, devices.afg6.illuminance);
+    break
     default:
       break;
   }
