@@ -1,3 +1,5 @@
+var clock = document.querySelector("clock");
+
 var renderTime = async function () {
     const apiURL = 'https://api.brightsky.dev/weather?lat=52&lon=7.6&date=2024-09-11';
     try {
