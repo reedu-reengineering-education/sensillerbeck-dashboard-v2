@@ -40,11 +40,11 @@ const devices = {
     pressure: "630e0f2680edfb001ceccbd5",
   },
   afg5: {
-    deviceId: "630e0f2680edfb001ceccbd4",
+    deviceId: "66e165f9685dd00007c278ff",
     Personenanzahl: "630e0f2680edfb001ceccbdb",
   },
   afg6: {
-    deviceId: "630e0f2680edfb001ceccbd4",
+    deviceId: "66e16c23685dd00007cc6be1",
     CO2Werte: "630e0f2680edfb001ceccbdb",
   },
 };
