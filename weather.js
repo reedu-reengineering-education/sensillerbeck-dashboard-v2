@@ -52,7 +52,7 @@ var renderTime = async function () {
     
             if (data.value){
                 var time = new Date();
-                Wettervergleich.textContent = Math.round(data.value* 100) / 100 +"° wärmer im Vergleich zu den gleichen Monaten in den Jahren 1961 bis 1990"
+                Wettervergleich.textContent = Math.round(data.value* 100) / 100 +"° wärmer im Vergleich zum "+  (time.toLocaleDateString("de-DE",{month: "long"}))+" in den Jahren 1961 bis 1990"
             }else {
                 Wettervergleich.textContent = "Nix mit Wetter";
             }
