@@ -212,12 +212,12 @@ function changePhenomena(phenomena) {
     case "visitors":
       options.title.text = "Besucher im Nachhaltigkeitszentrum";
       options.yaxis[0].title.text = "Personen";
-      fetchMeasurements(devices.afg5.devicedId, devices.afg5.illuminance);
+      fetchMeasurements(devices.afg5.devicedId, devices.afg5.Personenanzahl);
       break;
     case "carbon dioxide":
      options.title.text = "CO2 im Nachhaltigkeitszentrum";
      options.yaxis[0].title.text = "CO2 in ppm";
-     fetchMeasurements(devices.afg6.devicedId, devices.afg6.illuminance);
+     fetchMeasurements(devices.afg6.devicedId, devices.afg6.CO2Werte);
     break
     default:
       break;
