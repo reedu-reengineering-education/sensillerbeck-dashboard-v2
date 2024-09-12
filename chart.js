@@ -64,6 +64,12 @@ window.addEventListener("DOMContentLoaded", function () {
     fetch(
       "https://api.opensensemap.org/boxes/630e0f2680edfb001ceccbd4/data/630e0f2680edfb001ceccbdb?format=json"
     ),
+    fetch(
+      "https://opensensemap.org/explore/66e16c23685dd00007cc6be1/data/66e16c23685dd00007cc6be1?format=json"
+    ),
+    fetsh(
+      "https://opensensemap.org/explore/66e165f9685dd00007c278ff/data/66e165f9685dd00007c278ff?format=json"
+    )
   ])
     .then(function (responses) {
       // Get a JSON object from each of the responses
