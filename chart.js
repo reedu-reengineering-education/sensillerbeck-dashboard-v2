@@ -40,12 +40,12 @@ const devices = {
     pressure: "630e0f2680edfb001ceccbd5",
   },
   afg5: {
-    deviceId: "630e0f2680edfb001ceccbd4",
-    Personenanzahl: "630e0f2680edfb001ceccbdb",
+    deviceId: "66e165f9685dd00007c278ff",
+    Personenanzahl: "66e165f9685dd00007c27900",
   },
   afg6: {
-    deviceId: "630e0f2680edfb001ceccbd4",
-    CO2Werte: "630e0f2680edfb001ceccbdb",
+    deviceId: "66e16c23685dd00007cc6be1",
+    CO2Werte: "66e16c23685dd00007cc6be5",
   },
 };
 
@@ -64,6 +64,12 @@ window.addEventListener("DOMContentLoaded", function () {
     fetch(
       "https://api.opensensemap.org/boxes/630e0f2680edfb001ceccbd4/data/630e0f2680edfb001ceccbdb?format=json"
     ),
+    fetch(
+      "https://api.opensensemap.org/boxes/66e16c23685dd00007cc6be1/data/66e16c23685dd00007cc6be1?format=json"
+    ),
+    fetch(
+      "https://api.opensensemap.org/boxes/66e165f9685dd00007c278ff/data/66e165f9685dd00007c278ff?format=json"
+    )
   ])
     .then(function (responses) {
       // Get a JSON object from each of the responses
@@ -206,12 +212,12 @@ function changePhenomena(phenomena) {
     case "visitors":
       options.title.text = "Besucher im Nachhaltigkeitszentrum";
       options.yaxis[0].title.text = "Personen";
-      fetchMeasurements(devices.afg5.devicedId, devices.afg5.illuminance);
+      fetchMeasurements(devices.afg5.deviceId, devices.afg5.Personenanzahl);
       break;
     case "carbon dioxide":
-     options.title.text = "CO2 im Nachhaltigkeitszentrum";
-     options.yaxis[0].title.text = "CO2 in ppm";
-     fetchMeasurements(devices.afg6.devicedId, devices.afg6.illuminance);
+      options.title.text = "CO2 im Nachhaltigkeitszentrum";
+      options.yaxis[0].title.text = "CO2 in ppm";
+      fetchMeasurements(devices.afg6.deviceId, devices.afg6.CO2Werte);
     break
     default:
       break;
