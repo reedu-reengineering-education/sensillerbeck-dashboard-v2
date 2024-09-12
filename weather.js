@@ -19,6 +19,7 @@ const ICON_MAPPING = {
 
 var clock = document.querySelector("#Wetter");
 var Icon = document.querySelector("#WetterIcon");
+var Wettervergleich= document.querySelector("#Wettervergleich")
 var renderTime = async function () {
     const apiURL = 'https://api.brightsky.dev/weather?lat=52&lon=7.6&date=2024-09-11';
     try {
@@ -42,3 +43,27 @@ var renderTime = async function () {
 }
    
     setInterval(renderTime, 1000);
+    
+    var TempVergleich = async function () {
+        const apiURL = 'https://long-term-average.klimadashboard-ms.reedu.de/';
+        try {
+            const response = await fetch(apiURL);
+            const data = await response.json();
+    
+            if (data.value){
+                var time = new Date();
+                Wettervergleich.textContent = Math.round(data.value* 100) / 100 +"° wärmer im Vergleich zum "+  (time.toLocaleDateString("de-DE",{month: "long"}))+" in den Jahren 1961 bis 1990"
+            }else {
+                Wettervergleich.textContent = "Nix mit Wetter";
+            }
+        } catch (error){
+            console.error('Error fetching weather data:', error);
+    
+        }
+    }
+       
+        setInterval(TempVergleich, 1000);
+    
+    
+    
+   
